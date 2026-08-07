@@ -123,7 +123,7 @@ export function Hero() {
         <figure className="relative z-10">
           <div className="relative overflow-hidden rounded-lg">
             <img
-              src="/david-itina.jpg"
+              src="/IMG_9631%20(1).jpg"
               alt="Portrait of David Itina, AI and machine learning engineer"
               width={933}
               height={1400}
