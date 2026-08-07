@@ -16,17 +16,21 @@ export function Section({
   return (
     <section
       id={id}
-      className={`mx-auto w-full max-w-[76rem] px-6 py-24 sm:px-10 sm:py-36 lg:py-44 ${className}`}
+      className={`mx-auto w-full max-w-[76rem] px-6 py-20 sm:px-10 sm:py-28 lg:py-36 ${className}`}
     >
       {(eyebrow || title) && (
-        <header className="grid gap-6 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-12">
-          {eyebrow && <p className="eyebrow pt-3">{eyebrow}</p>}
+        <header className="grid gap-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-12">
+          {eyebrow && <p className="eyebrow pt-2.5">{eyebrow}</p>}
           {title && (
-            <h2 className="max-w-2xl text-[2.25rem] sm:text-6xl">{title}</h2>
+            <h2 className="max-w-2xl text-[1.85rem] tracking-tight sm:text-[2.75rem] lg:text-[3.25rem]">
+              {title}
+            </h2>
           )}
         </header>
       )}
-      <div className={eyebrow || title ? "mt-16 sm:mt-24" : ""}>{children}</div>
+      <div className={eyebrow || title ? "mt-12 sm:mt-16 lg:mt-20" : ""}>
+        {children}
+      </div>
     </section>
   );
 }

@@ -1,6 +1,6 @@
 export function About() {
   return (
-    <div className="max-w-2xl space-y-8 text-lg leading-[1.8] text-foreground/80 sm:text-xl sm:leading-[1.8]">
+    <div className="max-w-2xl space-y-7 text-[1.0625rem] leading-[1.75] text-foreground/80 sm:text-lg sm:leading-[1.8]">
       <p>
         I studied Industrial Mathematics at Covenant University, and I work the way that
         training taught me: understand the structure of a problem before reaching for a
