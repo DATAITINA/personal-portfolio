@@ -1,64 +1,62 @@
-import { ArrowDown, Github, MapPin } from "lucide-react";
 import { PROFILE } from "@/data/portfolio";
-import { NetworkVisual } from "./NetworkVisual";
+import portrait from "@/assets/david-itina.jpg.asset.json";
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-28 sm:pt-36">
-      <div aria-hidden="true" className="absolute inset-0 hero-glow" />
-      <div aria-hidden="true" className="absolute inset-0 grid-lines opacity-60" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:pb-28">
-        <div className="rise-in">
-          <p className="eyebrow">AI / Machine Learning Engineer</p>
-          <h1 className="mt-5 text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-[4.2rem]">
-            Building AI systems that move from{" "}
-            <span className="text-primary">models to production</span>.
+    <section id="home" className="mx-auto w-full max-w-[76rem] px-6 pt-40 sm:px-10 sm:pt-52">
+      <div className="rise-in grid gap-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
+        <div>
+          <p className="eyebrow">{PROFILE.title}</p>
+          <h1 className="mt-10 text-[3rem] leading-[0.98] sm:text-[5.5rem] lg:text-[6.5rem]">
+            David Itina
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            AI/ML Engineer with an applied mathematics background, building
-            production-oriented machine learning systems across computer vision, classical
-            ML, RAG, and backend infrastructure.
+          <p className="mt-10 max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            I build machine learning systems that run in production — not notebooks.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-14 flex flex-wrap items-center gap-8">
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 hover:brightness-110"
+              className="border-b border-foreground pb-1 text-sm tracking-wide transition-colors hover:border-signal hover:text-signal"
             >
-              View Projects
-              <ArrowDown className="size-4" aria-hidden="true" />
+              Selected work
             </a>
             <a
-              href={PROFILE.github}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-2 rounded-lg border border-border-strong px-5 py-3 text-sm font-medium transition-colors hover:bg-secondary"
+              href={`mailto:${PROFILE.email}`}
+              className="border-b border-transparent pb-1 text-sm tracking-wide text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
             >
-              <Github className="size-4" aria-hidden="true" />
-              GitHub
+              Get in touch
             </a>
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5">
-              <span aria-hidden="true" className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-70" />
-                <span className="relative inline-flex size-2 rounded-full bg-signal" />
-              </span>
-              Open to AI/ML Engineering Opportunities
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <MapPin className="size-4" aria-hidden="true" />
-              {PROFILE.location}
-            </span>
-          </div>
         </div>
 
-        <div className="rise-in [animation-delay:120ms]">
-          <NetworkVisual />
-        </div>
+        <figure className="relative">
+          <img
+            src={portrait.url}
+            alt="Portrait of David Itina, AI and machine learning engineer"
+            width={1280}
+            height={1920}
+            className="aspect-[4/5] w-full rounded-sm object-cover object-top grayscale-[15%]"
+            style={{ boxShadow: "var(--shadow-portrait)" }}
+          />
+          <figcaption className="eyebrow mt-5 block">
+            {PROFILE.location}
+          </figcaption>
+        </figure>
       </div>
-      <div aria-hidden="true" className="rule-line mx-auto max-w-7xl" />
+
+      <div className="mt-28 grid gap-10 border-t border-border pt-10 sm:mt-40 sm:grid-cols-3">
+        {[
+          ["Focus", "Computer vision, fraud risk, RAG systems"],
+          ["Foundation", "Industrial mathematics, Covenant University"],
+          ["Currently", "Founder, ITINA AI"],
+        ].map(([k, v]) => (
+          <div key={k}>
+            <p className="eyebrow">{k}</p>
+            <p className="mt-3 text-base text-foreground/80">{v}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

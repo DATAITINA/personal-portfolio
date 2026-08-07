@@ -61,7 +61,7 @@ function Index() {
     <div className="min-h-dvh bg-background">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:text-primary-foreground"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
       >
         Skip to content
       </a>
@@ -69,56 +69,31 @@ function Index() {
       <main id="main">
         <Hero />
 
-        <Section
-          id="projects"
-          eyebrow="Portfolio"
-          title="Selected Work"
-          subtitle="A selection of machine learning and AI systems built across computer vision, fraud intelligence, document processing, and retrieval-augmented generation."
-        >
-          <div className="space-y-6">
-            <ProjectCard project={PROJECTS[0]!} index={1} featured />
-            <div className="grid gap-6 lg:grid-cols-2">
-              {PROJECTS.slice(1).map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i + 2} />
-              ))}
-            </div>
+        <Section id="projects" eyebrow="Selected work" title="Five systems, built end to end.">
+          <div>
+            {PROJECTS.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i + 1} />
+            ))}
           </div>
         </Section>
 
-        <Section
-          eyebrow="Toolset"
-          title="Technical Stack"
-          subtitle="The tools used across data, modelling, and delivery."
-        >
+        <Section eyebrow="Stack" title="Tools I reach for.">
           <TechStack />
         </Section>
 
-        <Section
-          id="experience"
-          eyebrow="Track record"
-          title="Experience"
-          subtitle="Applied research, engineering, and teaching."
-        >
+        <Section id="experience" eyebrow="Experience" title="Where the work happened.">
           <ExperienceTimeline />
         </Section>
 
-        <Section>
+        <Section eyebrow="Foundation" title="The mathematics underneath.">
           <MathFoundation />
         </Section>
 
-        <Section
-          eyebrow="Principles"
-          title="Engineering Philosophy"
-          subtitle="How these systems get built."
-        >
+        <Section eyebrow="Principles" title="How I build.">
           <Philosophy />
         </Section>
 
-        <Section
-          id="about"
-          eyebrow="About"
-          title="Applied mathematics, shipped as software."
-        >
+        <Section id="about" eyebrow="About" title="Applied mathematics, shipped as software.">
           <About />
         </Section>
 
@@ -130,3 +105,4 @@ function Index() {
     </div>
   );
 }
+
