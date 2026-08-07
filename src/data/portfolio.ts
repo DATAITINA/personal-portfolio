@@ -2,7 +2,7 @@ export const PROFILE = {
   name: "David Itina",
   title: "AI / Machine Learning Engineer",
   location: "Lagos, Nigeria",
-  email: "itsdaveytina@gmail.com",
+  email: "thedaviditina@gmail.com",
   github: "https://github.com/DATAITINA",
   linkedin: "https://www.linkedin.com/in/david-itina",
 };
