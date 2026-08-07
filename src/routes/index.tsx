@@ -76,7 +76,7 @@ function Index() {
           subtitle="A selection of machine learning and AI systems built across computer vision, fraud intelligence, document processing, and retrieval-augmented generation."
         >
           <div className="space-y-6">
-            <ProjectCard project={PROJECTS[0]} index={1} featured />
+            <ProjectCard project={PROJECTS[0]!} index={1} featured />
             <div className="grid gap-6 lg:grid-cols-2">
               {PROJECTS.slice(1).map((p, i) => (
                 <ProjectCard key={p.id} project={p} index={i + 2} />
