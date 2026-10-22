@@ -12,6 +12,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
+import serifItalicFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
+import sansFont from "@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { THEME_INIT_SCRIPT } from "../hooks/use-theme";
 
@@ -87,11 +90,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", media: "(prefers-color-scheme: dark)", content: "#16181d" },
     ],
     links: [
+      // Preload the fonts the hero uses, so the headline does not shift when they arrive.
+      ...[serifFont, serifItalicFont, sansFont].map((href) => ({
+        rel: "preload",
+        href,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous" as const,
+      })),
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      { rel: "manifest", href: "/site.webmanifest" },
+      // Credentials let the manifest load on password-protected preview deploys too.
+      { rel: "manifest", href: "/site.webmanifest", crossOrigin: "use-credentials" as const },
     ],
   }),
 
