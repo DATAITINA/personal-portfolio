@@ -77,6 +77,15 @@ function ErrorComponent({ error: raw, reset }: ErrorComponentProps) {
 }
 
 export const Route = createRootRoute({
+  /*
+   * Every page is static content, so let Vercel's CDN cache the HTML at the edge
+   * nearest the visitor instead of rendering it in iad1 on each request. A new
+   * deploy clears this cache, so updates still go live straight away.
+   */
+  headers: () => ({
+    "Cache-Control": "public, max-age=0, must-revalidate",
+    "CDN-Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
+  }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
