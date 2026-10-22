@@ -72,12 +72,12 @@ export function Navbar() {
           <span className="truncate">{PROFILE.name}</span>
         </a>
 
-        <ul className="hidden items-center gap-0.5 md:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-md px-3 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
               >
                 {l.label}
               </a>
@@ -99,7 +99,7 @@ export function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="inline-flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary md:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -109,7 +109,7 @@ export function Navbar() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="border-t border-border bg-background md:hidden"
+        className="border-t border-border bg-background lg:hidden"
       >
         <ul className="container-page flex flex-col py-3">
           {LINKS.map((l) => (
