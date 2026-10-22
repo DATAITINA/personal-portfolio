@@ -9,13 +9,37 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
+ * Georgia, resized to Instrument Serif's metrics (measured from the font files).
+ * Text set in the fallback takes the same space, so the swap causes no layout shift.
+ */
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  font-style: normal;
+  src: local("Georgia");
+  size-adjust: 75.67%;
+  ascent-override: 130.83%;
+  descent-override: 40.97%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  font-style: italic;
+  src: local("Georgia Italic"), local("Georgia-Italic");
+  size-adjust: 77.66%;
+  ascent-override: 127.48%;
+  descent-override: 39.92%;
+  line-gap-override: 0%;
+}
+
+/*
  * Design system.
  * Neutral paper and ink, one accent: a confident green ("signal").
  * Instrument Serif for display, Geist for reading, Geist Mono for labels.
  */
 
 @theme inline {
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Instrument Serif", "Instrument Serif Fallback", ui-serif, Georgia, serif;
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
 
