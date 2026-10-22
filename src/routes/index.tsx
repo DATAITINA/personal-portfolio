@@ -2,34 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { Section } from "@/components/portfolio/Section";
-import { ProjectCard } from "@/components/portfolio/ProjectCard";
-import { TechStack } from "@/components/portfolio/TechStack";
+import { CaseStudyCard } from "@/components/portfolio/CaseStudyCard";
+import { MoreWork } from "@/components/portfolio/MoreWork";
+import { HowIBuild } from "@/components/portfolio/HowIBuild";
 import { ExperienceTimeline } from "@/components/portfolio/ExperienceTimeline";
-import { MathFoundation } from "@/components/portfolio/MathFoundation";
-import { Philosophy } from "@/components/portfolio/Philosophy";
-import { About } from "@/components/portfolio/About";
+import { Skills } from "@/components/portfolio/Skills";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
-import { PROFILE, PROJECTS } from "@/data/portfolio";
+import { CASE_STUDIES, EDUCATION, PROFILE, SITE_URL } from "@/data/portfolio";
+import { pageHead } from "@/lib/seo";
 
-const TITLE = "David Itina — AI / Machine Learning Engineer";
-const DESCRIPTION =
-  "Portfolio of David Itina, AI/ML Engineer in Lagos building production-oriented ML systems across computer vision, fraud intelligence, document AI and RAG.";
+const TITLE = `${PROFILE.name} · AI Engineer`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "profile" },
-      { property: "og:url", content: "/" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
+    ...pageHead({ title: TITLE, description: PROFILE.description, path: "/", type: "profile" }),
     scripts: [
       {
         type: "application/ld+json",
@@ -37,17 +24,22 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Person",
           name: PROFILE.name,
+          url: SITE_URL,
+          image: `${SITE_URL}/images/david-itina-800.jpg`,
           jobTitle: PROFILE.title,
           email: `mailto:${PROFILE.email}`,
           address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
-          alumniOf: { "@type": "CollegeOrUniversity", name: "Covenant University" },
-          sameAs: [PROFILE.github, PROFILE.linkedin],
+          alumniOf: { "@type": "CollegeOrUniversity", name: EDUCATION.school },
+          worksFor: { "@type": "Organization", name: "ITINA AI" },
+          sameAs: [PROFILE.github, PROFILE.linkedin, PROFILE.x],
           knowsAbout: [
-            "Machine Learning",
-            "Computer Vision",
-            "Retrieval-Augmented Generation",
+            "Large language models",
+            "Retrieval-augmented generation",
+            "Machine learning",
+            "Computer vision",
             "FastAPI",
             "PyTorch",
+            "TensorFlow",
           ],
         }),
       },
@@ -61,7 +53,7 @@ function Index() {
     <div className="min-h-dvh bg-background">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background"
       >
         Skip to content
       </a>
@@ -69,40 +61,53 @@ function Index() {
       <main id="main">
         <Hero />
 
-        <Section id="projects" eyebrow="Selected work" title="Five systems, built end to end.">
-          <div>
-            {PROJECTS.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i + 1} />
+        <Section
+          id="work"
+          eyebrow="Selected work"
+          title="Proof, not promises."
+          intro="Four projects, from a live health app to a fraud scoring service. Each one has a full case study: the problem, what I built, the architecture and the trade-offs."
+        >
+          <div className="space-y-6">
+            {CASE_STUDIES.map((s, i) => (
+              <CaseStudyCard key={s.slug} study={s} index={i + 1} />
             ))}
+          </div>
+          <div className="mt-14">
+            <MoreWork />
           </div>
         </Section>
 
-        <Section eyebrow="Stack" title="Tools I reach for.">
-          <TechStack />
+        <Section
+          id="how-i-build"
+          eyebrow="How I build"
+          title="Habits from shipping real products."
+          intro="AI features fail in new ways. These are the rules I follow so users do not pay for it, and where you can see each one in my code."
+        >
+          <HowIBuild />
         </Section>
 
-        <Section id="experience" eyebrow="Experience" title="Where the work happened.">
+        <Section id="experience" eyebrow="Experience" title="Where I've done the work.">
           <ExperienceTimeline />
         </Section>
 
-        <Section eyebrow="Foundation" title="The mathematics underneath.">
-          <MathFoundation />
+        <Section
+          id="skills"
+          eyebrow="Skills"
+          title="Tools I've shipped with."
+          intro="Only tools I have used in real work. Each one links to where you can see it."
+        >
+          <Skills />
         </Section>
 
-        <Section eyebrow="Principles" title="How I build.">
-          <Philosophy />
-        </Section>
-
-        <Section id="about" eyebrow="About" title="Applied mathematics, shipped as software.">
-          <About />
-        </Section>
-
-        <Section id="contact">
+        <section
+          id="contact"
+          aria-labelledby="contact-title"
+          className="container-page py-16 sm:py-24"
+        >
           <Contact />
-        </Section>
+        </section>
       </main>
       <Footer />
     </div>
   );
 }
-

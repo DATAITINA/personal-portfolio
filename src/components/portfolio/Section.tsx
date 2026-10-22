@@ -4,33 +4,36 @@ export function Section({
   id,
   eyebrow,
   title,
+  intro,
   children,
   className = "",
 }: {
   id?: string;
   eyebrow?: string;
   title?: string;
+  intro?: string;
   children: ReactNode;
   className?: string;
 }) {
+  const headingId = id ? `${id}-title` : undefined;
   return (
     <section
       id={id}
-      className={`mx-auto w-full max-w-[76rem] px-6 py-20 sm:px-10 sm:py-28 lg:py-36 ${className}`}
+      aria-labelledby={title ? headingId : undefined}
+      className={`container-page py-16 sm:py-24 ${className}`}
     >
       {(eyebrow || title) && (
-        <header className="grid gap-4 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-12">
-          {eyebrow && <p className="eyebrow pt-2.5">{eyebrow}</p>}
+        <header className="max-w-2xl">
+          {eyebrow && <p className="eyebrow">{eyebrow}</p>}
           {title && (
-            <h2 className="max-w-2xl text-[1.85rem] tracking-tight sm:text-[2.75rem] lg:text-[3.25rem]">
+            <h2 id={headingId} className="mt-3 text-[2.1rem] sm:text-5xl">
               {title}
             </h2>
           )}
+          {intro && <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{intro}</p>}
         </header>
       )}
-      <div className={eyebrow || title ? "mt-12 sm:mt-16 lg:mt-20" : ""}>
-        {children}
-      </div>
+      <div className={eyebrow || title ? "mt-10 sm:mt-14" : ""}>{children}</div>
     </section>
   );
 }
