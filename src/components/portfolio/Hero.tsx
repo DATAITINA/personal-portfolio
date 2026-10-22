@@ -8,6 +8,9 @@ const PROOF = [
   { value: "150+", unit: "students", label: "taught at a tech camp I led" },
 ];
 
+/* Matches the figure's max widths below, so phones fetch the 320w or 480w file, not 800w. */
+const PORTRAIT_SIZES = "(min-width: 1024px) 20rem, (min-width: 640px) 18rem, 16rem";
+
 function ResumeButton() {
   const base =
     "inline-flex items-center gap-2 rounded-md border border-border-strong bg-surface px-4 py-2.5 text-sm font-medium text-foreground shadow-[var(--shadow-sm)] transition-colors hover:border-foreground/40";
@@ -33,10 +36,11 @@ export function Hero() {
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
         <div className="rise-in">
           <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground shadow-[var(--shadow-sm)]">
-            <span className="relative flex size-2" aria-hidden="true">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-50 motion-reduce:hidden" />
-              <span className="relative inline-flex size-2 rounded-full bg-signal" />
-            </span>
+            {/* A static dot: a looping pulse keeps the page "changing" and hurts Speed Index. */}
+            <span
+              className="inline-flex size-2 rounded-full bg-signal ring-4 ring-signal-soft"
+              aria-hidden="true"
+            />
             Open to opportunities · {PROFILE.workMode}
           </p>
 
@@ -72,13 +76,13 @@ export function Hero() {
           <picture>
             <source
               type="image/avif"
-              srcSet="/images/david-itina-480.avif 480w, /images/david-itina-800.avif 800w"
-              sizes="(min-width: 1024px) 20rem, 18rem"
+              srcSet="/images/david-itina-320.avif 320w, /images/david-itina-480.avif 480w, /images/david-itina-800.avif 800w"
+              sizes={PORTRAIT_SIZES}
             />
             <source
               type="image/webp"
-              srcSet="/images/david-itina-480.webp 480w, /images/david-itina-800.webp 800w"
-              sizes="(min-width: 1024px) 20rem, 18rem"
+              srcSet="/images/david-itina-320.webp 320w, /images/david-itina-480.webp 480w, /images/david-itina-800.webp 800w"
+              sizes={PORTRAIT_SIZES}
             />
             <img
               src="/images/david-itina-800.jpg"
@@ -86,7 +90,6 @@ export function Hero() {
               width={800}
               height={1000}
               fetchPriority="high"
-              decoding="async"
               className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top shadow-[var(--shadow-card)]"
             />
           </picture>
